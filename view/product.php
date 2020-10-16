@@ -1,5 +1,6 @@
 <?php
 require("../controllers/productcontroller.php");
+
 if(isset($_GET['pid'])){
     $pid = $_GET['pid'];
     $productDetails = returnProduct($pid);
@@ -19,7 +20,14 @@ if(isset($_GET['pid'])){
     <title>Single Product</title>
   </head>
   <body>
-    <?php include("inc/navbar.php");?>
+    <?php include("inc/navbar.php");
+        $ipadd = getRealIpAddr();
+        //get customer id
+        if(isset($_SESSION['customer_id'])){ $cid = $_SESSION['customer_id']; }
+        else{$cid = null;}
+        $qty = 1;
+
+    ?>
 
     <div class="container">
     <img src="<?= $productDetails['product_image'] ?>" width="200">
@@ -29,7 +37,7 @@ if(isset($_GET['pid'])){
     <p>Description: <?= $productDetails['product_desc'] ?></p>
     <p>Brand: <?= $productDetails['brand_name'] ?></p>
     <p>Category: <?= $productDetails['cat_name'] ?></p>
-    <a href="" class="btn btn-primary">Add To Cart</a>
+    <a href="<?php echo '../functions/cartaddprocess.php?pid='.$pid.'&ipadd='.$ipadd.'&cid='.$cid.'&qty='.$qty ?>" class="btn btn-primary">Add To Cart</a>
     </div>
 
 
