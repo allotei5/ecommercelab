@@ -23,17 +23,24 @@ if(!isset($_GET['searchTerm'])){
     <div class="container">
     <h3>Search Results For: <?= $_GET['searchTerm']?></h3>
     <?php
+
     $searchTerm = $_GET['searchTerm'] . "%";
     $results = searchProducts($searchTerm);
     if (!empty($results)){
     foreach($results as $key => $values){
+        $ipadd = getRealIpAddr();
+        if(isset($_SESSION['customer_id'])){ $cid = $_SESSION['customer_id']; }
+        else{$cid = null;}
+        $qty = 1;
         ?>
+
+
      <div class="media row-custom">
       <img src="<?= $values[1] ?>" class="align-self-start mr-3" alt="..." height="200px">
       <div class="media-body">
         <h5 class="mt-0"><?= $values[0] ?></h5>
         <p>Price: GHc<?= $values[2] ?></p>
-        <a href="#" class="btn btn-primary">Add To Cart</a>
+        <a href="<?php echo '../functions/cartaddprocess.php?pid='.$key.'&ipadd='.$ipadd.'&cid='.$cid.'&qty='.$qty ?>" class="btn btn-primary">Add To Cart</a>
 
       </div>
     </div>

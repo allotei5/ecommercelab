@@ -28,5 +28,26 @@ class cartClass extends db_connection
         return $this->db_query($sql);
     }
 
+    //display cart
+    //logged in customers
+    public function displayCart($cid){
+        $sql = "SELECT `cart`.`p_id`, `cart`.`c_id`, `cart`.`qty`, `products`.`product_title`, `products`.`product_price`, `products`.`product_image` FROM `cart`
+        JOIN `products` on (`cart`.`p_id` = `products`.`product_id`)
+        WHERE `cart`.`c_id` = '$cid'";
+
+        //run the query
+        return $this->db_query($sql);
+    }
+
+    //not logged in customers
+    public function displayCartNull($ipadd){
+        $sql = "SELECT `cart`.`p_id`, `cart`.`ip_add`, `cart`.`qty`, `products`.`product_title`, `products`.`product_price`, `products`.`product_image` FROM `cart`
+        JOIN `products` on (`cart`.`p_id` = `products`.`product_id`)
+        WHERE `cart`.`ip_add` = '$ipadd'";
+
+        //run the query
+        return $this->db_query($sql);
+    }
+
 }
 ?>

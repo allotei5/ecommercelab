@@ -50,6 +50,9 @@ if (isset($_SESSION['customer_id'])){
       <li class="nav-item">
         <a class="nav-link" href="listproducts.php">Products</a>
       </li>
+      <li class="nav-item">
+        <a class="nav-link" href="../view/cart.php">Cart</a>
+      </li>
     </ul>
   </div>
 <?php
@@ -63,6 +66,9 @@ if (isset($_SESSION['customer_id'])){
       </li>
       <li class="nav-item">
         <a class="nav-link" href="../login/register.php">Register</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="../view/cart.php">Cart</a>
       </li>
     </ul>
 
@@ -79,6 +85,9 @@ if (isset($_SESSION['customer_id'])){
       </li>
       <li class="nav-item">
         <a class="nav-link" href="../login/register.php">Register</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="../view/cart.php">Cart</a>
       </li>
     </ul>
 

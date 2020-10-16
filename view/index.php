@@ -16,7 +16,12 @@ require("../functions/productdisplayprocess.php");
     <title>Shopping</title>
   </head>
   <body>
-      <?php include("inc/navbar.php");?>
+      <?php include("inc/navbar.php");
+        $ipadd = getRealIpAddr();
+        if(isset($_SESSION['customer_id'])){ $cid = $_SESSION['customer_id']; }
+        else{$cid = null;}
+        $qty = 1;
+      ?>
 
 
 <div class="container">
@@ -36,7 +41,7 @@ require("../functions/productdisplayprocess.php");
                 <p class="card-text">Ghc <?= $values[6]; ?></p>
                   <p class="card-text"><?= $values[3]; ?></p>
                 <a href="product.php?pid=<?= $key; ?>" class="btn btn-primary">View Product</a>
-                <a href="#" class="btn btn-primary">Add to Cart</a>
+                <a href="<?php echo '../functions/cartaddprocess.php?pid='.$key.'&ipadd='.$ipadd.'&cid='.$cid.'&qty='.$qty ?>" class="btn btn-primary" class="btn btn-primary">Add to Cart</a>
               </div>
               </div>
         </div>
