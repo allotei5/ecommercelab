@@ -38,7 +38,7 @@ class cartClass extends db_connection
 
     //not logged in customers
     public function checkDuplicateNull($pid, $ipadd){
-        $sql = "SELECT `ip_add`, `c_id` FROM `cart` WHERE `ip_add`='$ipadd' AND `c_id`='$cid'";
+        $sql = "SELECT `ip_add`, `p_id` FROM `cart` WHERE `ip_add`='$ipadd' AND `p_id`='$pid'";
 
         return $this->db_query($sql);
     }
