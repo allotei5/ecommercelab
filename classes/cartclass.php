@@ -28,6 +28,20 @@ class cartClass extends db_connection
         return $this->db_query($sql);
     }
 
+    //check for duplicate
+    //logged in customers
+    public function checkDuplicate($pid, $cid){
+        $sql = "SELECT `p_id`, `c_id` FROM `cart` WHERE `p_id`='$pid' AND `c_id`='$cid'";
+
+        return $this->db_query($sql);
+    }
+
+    //not logged in customers
+    public function checkDuplicateNull($pid, $ipadd){
+        $sql = "SELECT `ip_add`, `c_id` FROM `cart` WHERE `ip_add`='$ipadd' AND `c_id`='$cid'";
+
+        return $this->db_query($sql);
+    }
     //display cart
     //logged in customers
     public function displayCart($cid){
@@ -44,6 +58,23 @@ class cartClass extends db_connection
         $sql = "SELECT `cart`.`p_id`, `cart`.`ip_add`, `cart`.`qty`, `products`.`product_title`, `products`.`product_price`, `products`.`product_image` FROM `cart`
         JOIN `products` on (`cart`.`p_id` = `products`.`product_id`)
         WHERE `cart`.`ip_add` = '$ipadd'";
+
+        //run the query
+        return $this->db_query($sql);
+    }
+
+    //update cart
+    //logged in customers
+    public function updateCart($cid, $pid, $qty){
+        $sql = "UPDATE `cart` SET `qty`='$qty' WHERE `c_id`='$cid' AND `p_id`='$pid'";
+
+        //run the query
+        return $this->db_query($sql);
+    }
+
+    //not logged in customers
+    public function updateCartNull($ipadd, $pid, $qty){
+        $sql = "UPDATE `cart` SET `qty`='$qty' WHERE `ip_add`='$ipadd' AND `p_id`='$pid'";
 
         //run the query
         return $this->db_query($sql);

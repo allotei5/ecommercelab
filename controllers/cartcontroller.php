@@ -35,6 +35,47 @@ function insertProductIntoCartNull_fxn($pid, $ipadd, $qty){
     }
 }
 
+//check for duplicates
+//logged in customer
+function checkDuplicates($pid, $cid){
+    //create a new object
+    $newCartObject = new cartClass();
+
+    $runQuery = $newCartObject->checkDuplicate($pid, $cid);
+
+    if ($runQuery){
+        $record = $newCartObject->db_fetch();
+        if (!empty($record['p_id']) && !empty($record['c_id'])){
+            return true;
+        }else{
+            return false;
+        }
+    }else{
+        return false;
+    }
+
+}
+
+//check for duplicates
+// not logged in customer
+function checkDuplicatesNull($pid, $ipadd){
+    //create a new object
+    $newCartObject = new cartClass();
+
+    $runQuery = $newCartObject->checkDuplicateNull($pid, $ipadd);
+
+    if ($runQuery){
+        $record = $newCartObject->db_fetch();
+        if (!empty($record['p_id']) && !empty($record['ip_add'])){
+            return true;
+        }else{
+            return false;
+        }
+    }else{
+        return false;
+    }
+}
+
 function displayCart_fxn($cid){
     //create a new object
     $newCartObject = new cartClass();
@@ -91,6 +132,39 @@ function displayCartNull_fxn($ipadd){
         }
 
         return $prodArray;
+    }else{
+        return false;
+    }
+}
+
+//update cart functions
+//logged in customers
+function updateCart_fxn($cid, $pid, $qty){
+    //create a new object
+    $newCartObject = new cartClass();
+
+    $runQuery = $newCartObject->updateCart($cid, $pid, $qty);
+
+    //if query run successfully
+    if ($runQuery){
+        //return query result
+        return $runQuery;
+    }else{
+        return false;
+    }
+}
+
+//not logged in customers
+function updateCartNull_fxn($ipadd, $pid, $qty){
+    //create a new object
+    $newCartObject = new cartClass();
+
+    $runQuery = $newCartObject->updateCartNull($ipadd, $pid, $qty);
+
+    //if query run successfully
+    if ($runQuery){
+        //return query result
+        return $runQuery;
     }else{
         return false;
     }

@@ -36,9 +36,10 @@
             <h5 class="mt-0"><?= $cartItem[2] ?></h5>
             <h8 class="mt-0">Price: Ghc <?= $cartItem[3] ?></h8>
             <p>Quantity:</p>
-            <form class="form-inline">
+            <form class="form-inline" method="GET" action="../functions/manage_quantity_cart.php">
               <div class="form-group mb-2">
-                <input type="number" class="form-control" id="inputPassword2" value="<?= $cartItem[1] ?>">
+                <input type="number" class="form-control" id="inputPassword2" value="<?= $cartItem[1] ?>" name="qty">
+                <input type="hidden" name="pid" value="<?= $key ?>">
               </div>
               <button type="submit" class="btn mx-sm-3 btn-primary mb-2">Update Quantity</button>
               <a href="" class="btn btn-danger  mb-2">Remove From Cart</a>
