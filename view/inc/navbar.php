@@ -1,4 +1,6 @@
 <?php
+require("../controllers/cartcontroller.php");
+
     //check if button is clicked
     if (isset($_GET['submit'])){
         $term = $_GET['searchTerm'];
@@ -29,6 +31,13 @@
 <?php
 
 session_start();
+$ipadd = getRealIpAddr();
+if(isset($_SESSION['customer_id'])){
+    $total = cartTotal_fxn($_SESSION['customer_id']);
+}else{
+    $total = cartTotalNull_fxn($ipadd);
+}
+
 if (isset($_SESSION['customer_id'])){
     if($_SESSION['user_role'] == 1){
     //if user is admin
@@ -51,7 +60,7 @@ if (isset($_SESSION['customer_id'])){
         <a class="nav-link" href="listproducts.php">Products</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="../view/cart.php">Cart</a>
+        <a class="nav-link" href="../view/cart.php">Cart(<?php echo $total['count']; ?>)</a>
       </li>
     </ul>
   </div>
@@ -68,7 +77,7 @@ if (isset($_SESSION['customer_id'])){
         <a class="nav-link" href="../login/register.php">Register</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="../view/cart.php">Cart</a>
+        <a class="nav-link" href="../view/cart.php">Cart (<?php echo $total['count']; ?>)</a>
       </li>
     </ul>
 
@@ -87,7 +96,7 @@ if (isset($_SESSION['customer_id'])){
         <a class="nav-link" href="../login/register.php">Register</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="../view/cart.php">Cart</a>
+        <a class="nav-link" href="../view/cart.php">Cart (<?php echo $total['count']; ?>)</a>
       </li>
     </ul>
 

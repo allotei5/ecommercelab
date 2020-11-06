@@ -137,6 +137,34 @@ function displayCartNull_fxn($ipadd){
     }
 }
 
+function cartTotal_fxn($cid){
+    $newCartObject = new cartClass();
+
+    $runQuery = $newCartObject->cartTotal($cid);
+
+    //check if query run
+    if($runQuery){
+        $total = $newCartObject->db_fetch();
+        return $total;
+    }else{
+        return false;
+    }
+}
+
+function cartTotalNull_fxn($ipadd){
+    $newCartObject = new cartClass();
+
+    $runQuery = $newCartObject->cartTotalNull($ipadd);
+
+    //check if query run
+    if($runQuery){
+        $total = $newCartObject->db_fetch();
+        return $total;
+    }else{
+        return false;
+    }
+}
+
 //update cart functions
 //logged in customers
 function updateCart_fxn($cid, $pid, $qty){

@@ -1,6 +1,6 @@
 <?php
 //connect to database class
-require("../settings/db_class.php");
+require_once("../settings/db_class.php");
 
 /**
 *Product class to handle everything cart related
@@ -60,6 +60,18 @@ class cartClass extends db_connection
         WHERE `cart`.`ip_add` = '$ipadd'";
 
         //run the query
+        return $this->db_query($sql);
+    }
+
+    //get cart totals
+    //logged and not logged in customers
+    public function cartTotal($cid){
+        $sql = "SELECT count(`c_id`) AS `count` FROM `cart` WHERE `c_id`='$cid'";
+        return $this->db_query($sql);
+    }
+
+    public function cartTotalNull($ipadd){
+        $sql = "SELECT count(`ip_add`) AS `count` FROM `cart` WHERE `ip_add`='$ipadd'";
         return $this->db_query($sql);
     }
 
