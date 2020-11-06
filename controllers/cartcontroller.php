@@ -1,6 +1,6 @@
 <?php
 
-require("../classes/cartclass.php");
+require_once("../classes/cartclass.php");
 /*
 *cart controller to handle everything about the cart
 */
@@ -192,6 +192,35 @@ function updateCartNull_fxn($ipadd, $pid, $qty){
     //if query run successfully
     if ($runQuery){
         //return query result
+        return $runQuery;
+    }else{
+        return false;
+    }
+}
+
+//delete from cart functions
+//logged in customer
+function deleteCart_fxn($cid,$pid){
+    $newCartObject = new cartClass();
+
+    $runQuery = $newCartObject->deleteCart($cid,$pid);
+
+    //if query run successfully
+    if($runQuery){
+        return $runQuery;
+    }else{
+        return false;
+    }
+}
+
+//not logged in customers
+function deleteCartNull_fxn($ipadd,$pid){
+    $newCartObject = new cartClass();
+
+    $runQuery = $newCartObject->deleteCartNull($ipadd,$pid);
+
+    //if query run successfully
+    if($runQuery){
         return $runQuery;
     }else{
         return false;

@@ -14,7 +14,7 @@
   <body>
     <?php
       include("inc/navbar.php");
-      require("../controllers/cartcontroller.php");
+      require_once("../controllers/cartcontroller.php");
       if (isset($_SESSION['customer_id'])){
           $cid = $_SESSION['customer_id'];
           $cart = displayCart_fxn($cid);
@@ -42,7 +42,7 @@
                 <input type="hidden" name="pid" value="<?= $key ?>">
               </div>
               <button type="submit" class="btn mx-sm-3 btn-primary mb-2">Update Quantity</button>
-              <a href="" class="btn btn-danger  mb-2">Remove From Cart</a>
+              <a href="<?php echo "../functions/remove_from_cart.php?id=".$key; ?>" class="btn btn-danger  mb-2">Remove From Cart</a>
             </form>
           </div>
         </div>

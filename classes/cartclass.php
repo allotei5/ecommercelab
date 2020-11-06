@@ -92,5 +92,22 @@ class cartClass extends db_connection
         return $this->db_query($sql);
     }
 
+    //delete from cart
+    //logged in customers
+    public function deleteCart($cid,$pid){
+        $sql = "DELETE FROM `cart` WHERE `c_id`='$cid' AND `p_id`='$pid'";
+
+        //run the query
+        return $this->db_query($sql);
+    }
+
+    //not logged in customers
+    public function deleteCartNull($ipadd, $pid){
+        $sql = "DELETE FROM `cart` WHERE `ip_add`='$ipadd' AND `p_id`='$pid'";
+
+        //run the query
+        return $this->db_query($sql);
+    }
+
 }
 ?>
