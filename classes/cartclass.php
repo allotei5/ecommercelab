@@ -109,5 +109,22 @@ class cartClass extends db_connection
         return $this->db_query($sql);
     }
 
+    //get cart total
+    //logged in customers
+    public function cartValue($cid){
+        $sql="SELECT SUM(`products`.`product_price`*`cart`.`qty`) as Result
+FROM `cart` JOIN `products` ON (`products`.`product_id` = `cart`.`p_id`) WHERE `cart`.`c_id`='$cid'";
+
+        return $this->db_query($sql);
+    }
+
+    //not logged in customers
+    public function cartValueNull($ipadd){
+        $sql="SELECT SUM(`products`.`product_price`*`cart`.`qty`) as Result
+FROM `cart` JOIN `products` ON (`products`.`product_id` = `cart`.`p_id`) WHERE `cart`.`ip_add`='$ipadd'";
+
+        return $this->db_query($sql);
+    }
+
 }
 ?>

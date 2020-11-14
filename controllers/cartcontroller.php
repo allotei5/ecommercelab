@@ -227,4 +227,32 @@ function deleteCartNull_fxn($ipadd,$pid){
     }
 }
 
+//cart value functions
+//logged in customer
+function cartValue_fxn($cid){
+    $newCartObject = new cartClass();
+
+    $runQuery = $newCartObject->cartValue($cid);
+
+    if ($runQuery){
+        $total = $newCartObject->db_fetch();
+        return $total;
+    }else{
+        return false;
+    }
+}
+
+function cartValueNull_fxn($ipadd){
+    $newCartObject = new cartClass();
+
+    $runQuery = $newCartObject->cartValueNull($ipadd);
+
+    if ($runQuery){
+        $total = $newCartObject->db_fetch();
+        return $total;
+    }else{
+        return false;
+    }
+}
+
 ?>

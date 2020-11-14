@@ -76,25 +76,61 @@
                   <th scope="row"><?= $cartItem[2] ?></th>
                   <td>Ghc <?= $cartItem[3] ?></td>
                     <td>
-                        <form class="form-inline" method="GET" action="../functions/manage_quantity_cart.php">
-                            <input name="qty" type="number" value="<?= $cartItem[1] ?>" class="form-control input-sm">
-                            <input  type="hidden" name="pid" value="<?= $key ?>">
-                            <button class="mx-sm-3 btn btn-primary"> Update</button>
-                            <a href="<?php echo "../functions/remove_from_cart.php?id=".$key; ?>" class="btn btn-danger">Remove</a>
-                        </form>
+                        <?= $cartItem[1] ?>
 
                     </td>
                 </tr>
 
                   <?php } ?>
 
-
               </tbody>
             </table>
-            <a href="index.php" class="btn btn-primary">Continue shopping</a>
-                  <a href="payment.php" class="btn btn-primary">Check-Out</a>
         </div>
+        <div class="col-sm-3 bg-light" style="padding: 40px 10px ">
+          <h5 style="padding-bottom: 10px">Cart Summary</h5>
+          <table class="table">
+  <thead>
 
+  </thead>
+  <tbody>
+    <tr>
+
+      <td>Sub-Total</td>
+      <td>Ghc <?= $checkOutAmt['Result'] ?></td>
+
+    </tr>
+
+    <tr>
+
+      <td>Total</td>
+      <td>Ghc <?= $checkOutAmt['Result'] ?></td>
+
+    </tr>
+  </tbody>
+</table>
+        <form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+
+          <!-- Identify your business so that you can collect the payments. -->
+          <input type="hidden" name="business" value="herschelgomez@xyzzyu.com">
+
+          <!-- Specify a Buy Now button. -->
+          <input type="hidden" name="cmd" value="_xclick">
+
+          <!-- Specify details about the item that buyers will purchase. -->
+          <input type="hidden" name="item_name" value="Hot Sauce-12oz. Bottle">
+          <input type="hidden" name="amount" value="5.95">
+          <input type="hidden" name="currency_code" value="<?= $checkOutAmt['Result'] ?>">
+
+          <!-- Display the payment button. -->
+          <input type="image" name="submit" border="0"
+          src="https://www.paypalobjects.com/en_US/i/btn/btn_buynow_LG.gif"
+          alt="Buy Now">
+          <img alt="" border="0" width="1" height="1"
+          src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" >
+
+        </form>
+
+        </div>
 
       </div>
     </div>
