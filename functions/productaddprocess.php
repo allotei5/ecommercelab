@@ -1,5 +1,5 @@
 <?php
-require("../controllers/productcontroller.php");
+require_once("../controllers/productcontroller.php");
 $errors = array();
 
 if (isset($_POST['submit'])){
@@ -57,7 +57,14 @@ if (isset($_POST['submit'])){
 
     //if form is fine
     if (count($errors) == 0){
+        echo "file to be uploaded: ". $_FILES["pimg"]["tmp_name"];
+        echo "<br>";
+        echo "target file: " . $target_file;
+        echo "<br>";
+
         $uploadImage = move_uploaded_file($_FILES["pimg"]["tmp_name"], $target_file);
+        echo "return value move uploaded: ". $uploadImage;
+        return;
         if ($uploadImage){
             $addProduct = addProduct($pcat, $pbrand, $pname, $pprice, $pdesc, $target_file, $pkeyword);
 

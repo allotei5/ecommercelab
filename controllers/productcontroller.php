@@ -1,6 +1,6 @@
 <?php
 //connect to the product class
-require("../classes/productclass.php");
+require_once("../classes/productclass.php");
 
 //add new brand function
 //takes brand name

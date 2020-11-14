@@ -1,5 +1,5 @@
 <?php
-require("../controllers/productcontroller.php");
+require_once("../controllers/productcontroller.php");
 $categories = array();
 $categories = displayCategories();
 $errors = array();

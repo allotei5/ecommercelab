@@ -1,6 +1,6 @@
 <?php
 //connect to the customer class
-require("../classes/customerclass.php");
+require_once("../classes/customerclass.php");
 
 //insert customer function
 //takes name, email, password, country, city, contact
