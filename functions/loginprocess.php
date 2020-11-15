@@ -1,6 +1,7 @@
 <?php
 //connect to the controller
 require("../controllers/customercontroller.php");
+require_once("../controllers/cartcontroller.php");
 $errors = array();
 
 //check if submit button was clicked
@@ -39,6 +40,7 @@ if(isset($_POST['customerLogin'])){
             session_start();
             $_SESSION['customer_id'] = $loginInfo['customer_id'];
             $_SESSION['user_role'] = $loginInfo['user_role'];
+            $updateCart = updateCartWithCID_fxn($_SESSION['customer_id']);
             header("location: ../view/index.php");
 
 

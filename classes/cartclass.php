@@ -126,5 +126,32 @@ FROM `cart` JOIN `products` ON (`products`.`product_id` = `cart`.`p_id`) WHERE `
         return $this->db_query($sql);
     }
 
+    public function updateCartWithCID($cid){
+        $sql = "UPDATE `cart` SET `c_id`='$cid'";
+        return $this->db_query($sql);
+    }
+
+    //function to add to orders
+    public function addOrder($cid, $inv_no, $ord_date, $ord_stat){
+        $sql = "INSERT INTO `orders`(`customer_id`, `invoice_no`, `order_date`, `order_status`) VALUES ('$cid','$inv_no','$ord_date','$ord_stat')";
+        return $this->db_query($sql);
+    }
+
+    //function to add to order details
+    public function addOrderDetails($ord_id, $prod_id, $qty){
+        $sql = "INSERT INTO `orderdetails`(`order_id`, `product_id`, `qty`) VALUES ('$ord_id','$prod_id','$qty')";
+        return $this->db_query($sql);
+    }
+
+    public function addPayment($amt, $cid, $ord_id, $currency, $pay_date){
+        $sql = "INSERT INTO `payment`(`amt`, `customer_id`, `order_id`, `currency`, `payment_date`) VALUES ('$amt','$cid','$ord_id','$currency','$pay_date')";
+        return $this->db_query($sql);
+    }
+
+    public function recentOrder(){
+        $sql = "SELECT MAX(`order_id`) as recent FROM `orders`";
+        return $this->db_query($sql);
+    }
+
 }
 ?>

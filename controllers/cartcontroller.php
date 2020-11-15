@@ -255,4 +255,54 @@ function cartValueNull_fxn($ipadd){
     }
 }
 
+function updateCartWithCID_fxn($cid){
+    $newCartObject = new cartClass();
+
+    $runQuery = $newCartObject->updateCartWithCID($cid);
+
+    if ($runQuery){
+        return $runQuery;
+    }else{
+        return false;
+    }
+}
+
+function addOrder_fxn($cid, $inv_no, $ord_date, $ord_stat){
+    $newCartObject = new cartClass();
+
+    $runQuery = $newCartObject->addOrder($cid, $inv_no, $ord_date, $ord_stat);
+
+    if ($runQuery){
+        return $runQuery;
+    }else{
+        return false;
+    }
+}
+
+function addOrderDetails_fxn($ord_id, $prod_id, $qty){
+    $newCartObject = new cartClass();
+
+    $runQuery = $newCartObject->addOrderDetails($ord_id, $prod_id, $qty);
+
+    if ($runQuery){
+        return $runQuery;
+    }else{
+        return false;
+    }
+}
+
+function addPayment_fxn($amt, $cid, $ord_id, $currency, $pay_date){
+    $newCartObject = new cartClass();
+
+    $runQuery = $newCartObject->addPayment($amt, $cid, $ord_id, $currency, $pay_date);
+
+    if ($runQuery){
+        return $runQuery;
+    }else{
+        return false;
+    }
+}
+
+function
+
 ?>

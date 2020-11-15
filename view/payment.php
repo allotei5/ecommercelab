@@ -21,6 +21,7 @@
           $checkOutAmt = cartValue_fxn($cid);
 
       }else{
+          header("location: ../login/login.php");
           $ipadd = getRealIpAddr();
           $cart = displayCartNull_fxn($ipadd);
           $checkOutAmt = cartValueNull_fxn($ipadd);
@@ -103,30 +104,15 @@
     <tr>
 
       <td>Total</td>
-      <td>Ghc <?= $checkOutAmt['Result'] ?></td>
+      <td>Ghc <span id="amt"><?= $checkOutAmt['Result'] ?></span></td>
+
 
     </tr>
   </tbody>
+
 </table>
-        <form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post" target="_top">
-<input type="hidden" name="cmd" value="_xclick">
-<input type="hidden" name="business" value="K4CZHV79UL4VJ">
-<input type="hidden" name="lc" value="US">
-<input type="hidden" name="item_name" value="stuff">
-<input type="hidden" name="item_number" value="12">
-<input type="hidden" name="amount" value="<?= $checkOutAmt['Result'] ?>">
-<input type="hidden" name="currency_code" value="USD">
-<input type="hidden" name="button_subtype" value="services">
-<input type="hidden" name="no_note" value="1">
-<input type="hidden" name="no_shipping" value="1">
-<input type="hidden" name="rm" value="1">
-<input type="hidden" name="return" value="http://51.11.141.69/ecommerce-lab/functions/process_payment.php">
-<input type="hidden" name="cancel_return" value="http://51.11.141.69/ecommerce-lab/view/payment.php">
-<input type="hidden" name="bn" value="PP-BuyNowBF:btn_buynowCC_LG.gif:NonHosted">
-<input type="hidden" name="notify_url" value="http://51.11.141.69/ecommerce-lab/functions/process_payment.php">
-<input type="image" src="https://www.sandbox.paypal.com/en_US/i/btn/btn_buynowCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
-<img alt="" border="0" src="https://www.sandbox.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1">
-</form>
+    <div id="paypal-payment-button">
+    </div>
 
 
         </div>
@@ -144,5 +130,7 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" integrity="sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s" crossorigin="anonymous"></script>
     -->
+    <script src="https://www.paypal.com/sdk/js?client-id=AVfGv6Z5RwC0EOTNplKlG2XLXRhWWREacIPQKRdVDevDzmi6snUeA5MC4IYEUOo-ePbTIDMYhPT2iG-E&disable-funding=credit,card"></script>
+    <script src="../js/payment.js"></script>
   </body>
 </html>
