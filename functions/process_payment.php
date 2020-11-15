@@ -27,7 +27,7 @@ if(isset($_GET['status'])){
             if($addPayment){
                 $delete = deleteWholeCart_fxn($cid);
                 if($delete){
-                    header("location: ../view/payment_success.php?ord_id=" .$recent);
+                    header("location: ../view/payment_success.php?ord_id=" .$recent['recent']);
                 }
             }else{
                 echo "payment failed";

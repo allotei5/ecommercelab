@@ -1,3 +1,10 @@
+<?php
+require_once("../controllers/cartcontroller.php");
+$ord_id = $_GET['ord_id'];
+$ord_arr = getOrder_fxn($ord_id);
+$ord_details_arr = getOrderDetails_fxn($ord_id);
+print_r($ord_details_arr);
+?>
 <!doctype html>
 <html lang="en">
   <head>
@@ -14,38 +21,39 @@
     <div class="container">
       <h1>Payment Accepted</h1>
       <h8>Your Order is being processed!</h8>
+      <p>Invoice Number: <?php echo $ord_arr['invoice_no'] ?></p>
       <h8>Order Details</h8>
       <table class="table">
   <thead>
     <tr>
       <th scope="col">#</th>
-      <th scope="col">First</th>
-      <th scope="col">Last</th>
-      <th scope="col">Handle</th>
+      <th scope="col">Product Name</th>
+      <th scope="col">Price</th>
+      <th scope="col">Quantity</th>
+      <th scope="col">Sub-Total</th>
     </tr>
   </thead>
   <tbody>
+      <?php
+        $counter = 1;
+        $totals = 0;
+        foreach($ord_details_arr as $key => $value){
+    ?>
     <tr>
-      <th scope="row">1</th>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>@mdo</td>
+      <th scope="row"><?php echo $counter; ?></th>
+      <td><?php echo $value['product_title'] ?></td>
+      <td><?php echo $value['product_price'] ?></td>
+      <td><?php echo $value['qty']; ?></td>
+      <td><?php echo $value['result']; ?></td>
     </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Jacob</td>
-      <td>Thornton</td>
-      <td>@fat</td>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td>Larry</td>
-      <td>the Bird</td>
-      <td>@twitter</td>
-    </tr>
+
+    <?php
+            $totals += $value['result'];
+            $counter++;
+        } ?>
   </tbody>
 </table>
-
+    <p>Totals: <?php  echo $totals; ?></p>
     </div>
 
     <!-- Optional JavaScript; choose one of the two! -->

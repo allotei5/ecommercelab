@@ -19,6 +19,6 @@ paypal.Buttons({
         })
     },
     onCancel: function(data){
-        window.location.href = "../functions/process_payment.php?status=failed"
+        window.location.href = "../view/payment.php?status=failed"
     }
 }).render('#paypal-payment-button');

@@ -126,8 +126,8 @@ FROM `cart` JOIN `products` ON (`products`.`product_id` = `cart`.`p_id`) WHERE `
         return $this->db_query($sql);
     }
 
-    public function updateCartWithCID($cid){
-        $sql = "UPDATE `cart` SET `c_id`='$cid'";
+    public function updateCartWithCID($cid, $ip_add){
+        $sql = "UPDATE `cart` SET `c_id`='$cid' WHERE `ip_add`='$ip_add'";
         return $this->db_query($sql);
     }
 
@@ -155,6 +155,16 @@ FROM `cart` JOIN `products` ON (`products`.`product_id` = `cart`.`p_id`) WHERE `
 
     public function deleteWholeCart($cid){
         $sql = "DELETE FROM `cart` WHERE `c_id`='$cid'";
+        return $this->db_query($sql);
+    }
+
+    public function getOrder($ord_id){
+        $sql = "SELECT  `customer`.`customer_name`, `orders`.`order_id`, `orders`.`invoice_no`, `orders`.`order_date`, `orders`.`order_status` FROM `orders` JOIN `customer` ON (`customer`.`customer_id` = `orders`.`customer_id`) WHERE `orders`.`order_id` = '$ord_id'";
+        return $this->db_query($sql);
+    }
+
+    public function getOrderDetails($ord_id){
+        $sql = "SELECT `products`.`product_title`, 	`products`.`product_price`, `orderdetails`.`qty`, `orderdetails`.`qty`*`products`.`product_price` as result FROM `orderdetails` JOIN `products` ON (`orderdetails`.`product_id` = `products`.`product_id`) WHERE `order_id`='$ord_id'";
         return $this->db_query($sql);
     }
 

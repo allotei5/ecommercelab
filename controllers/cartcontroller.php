@@ -255,10 +255,10 @@ function cartValueNull_fxn($ipadd){
     }
 }
 
-function updateCartWithCID_fxn($cid){
+function updateCartWithCID_fxn($cid, $ip_add){
     $newCartObject = new cartClass();
 
-    $runQuery = $newCartObject->updateCartWithCID($cid);
+    $runQuery = $newCartObject->updateCartWithCID($cid, $ip_add);
 
     if ($runQuery){
         return $runQuery;
@@ -322,6 +322,32 @@ function deleteWholeCart_fxn($cid){
 
     if ($runQuery){
         return $runQuery;
+    }else{
+        return false;
+    }
+}
+
+function getOrder_fxn($ord_id){
+    $newCartObject = new cartClass();
+
+    $runQuery = $newCartObject->getOrder($ord_id);
+    if($runQuery){
+        $ord_arr = $newCartObject->db_fetch();
+        return $ord_arr;
+    }else{
+        return false;
+    }
+}
+
+function getOrderDetails_fxn($ord_id){
+    $newCartObject = new cartClass();
+
+    $runQuery = $newCartObject->getOrderDetails($ord_id);
+    if($runQuery){
+        while($record = $newCartObject->db_fetch()){
+            $ord_arr[] = $record;
+        }
+        return $ord_arr;
     }else{
         return false;
     }
