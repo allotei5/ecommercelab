@@ -303,6 +303,28 @@ function addPayment_fxn($amt, $cid, $ord_id, $currency, $pay_date){
     }
 }
 
-function
+function recentOrder_fxn(){
+    $newCartObject = new cartClass();
+
+    $runQuery = $newCartObject->recentOrder();
+    if($runQuery){
+        $recent = $newCartObject->db_fetch();
+        return $recent;
+    }else{
+        return false;
+    }
+}
+
+function deleteWholeCart_fxn($cid){
+    $newCartObject = new cartClass();
+
+    $runQuery = $newCartObject->deleteWholeCart($cid);
+
+    if ($runQuery){
+        return $runQuery;
+    }else{
+        return false;
+    }
+}
 
 ?>

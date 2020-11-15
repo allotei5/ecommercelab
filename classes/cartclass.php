@@ -153,5 +153,10 @@ FROM `cart` JOIN `products` ON (`products`.`product_id` = `cart`.`p_id`) WHERE `
         return $this->db_query($sql);
     }
 
+    public function deleteWholeCart($cid){
+        $sql = "DELETE FROM `cart` WHERE `c_id`='$cid'";
+        return $this->db_query($sql);
+    }
+
 }
 ?>
